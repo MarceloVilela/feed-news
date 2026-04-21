@@ -1,9 +1,9 @@
-import React, { useCallback, useContext, useState } from 'react';
-import { Modal, View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { useRouter } from 'expo-router';
-import { slate } from 'tailwindcss/colors';
-import { styled, useColorScheme } from "nativewind"
-import Icon from '@expo/vector-icons/Feather'
+import React, { useCallback, useContext, useState } from "react";
+import { Modal, View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { useRouter } from "expo-router";
+import { slate } from "tailwindcss/colors";
+import { styled, useColorScheme } from "nativewind";
+import Icon from "@expo/vector-icons/Feather";
 
 interface Option {
   label: string;
@@ -16,8 +16,12 @@ interface SelectProps {
   handleOnChange: (value: string) => void;
 }
 
-export default function Select({selected, options, handleOnChange}: SelectProps) {
-  const router = useRouter()
+export default function Select({
+  selected,
+  options,
+  handleOnChange,
+}: SelectProps) {
+  const router = useRouter();
   //const { colorScheme, toggleColorScheme } = useColorScheme()
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -30,22 +34,24 @@ export default function Select({selected, options, handleOnChange}: SelectProps)
 
   return (
     <View className="flex items-end border-white">
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => setModalVisible(!modalVisible)}
         className="flex-row items-center border-slate-400 border-2 rounded-xl px-2"
       >
-        <Text className="text-xl flex-1 text-slate-900 dark:text-slate-100">{selected}</Text>
-        <Icon name="arrow-down" size={16} color={slate['400']} />
+        <Text className="text-xl flex-1 text-slate-900 dark:text-slate-100">
+          {selected}
+        </Text>
+        <Icon name="arrow-down" size={16} color={slate["400"]} />
       </TouchableOpacity>
 
       <Modal animationType="slide" transparent visible={modalVisible}>
         <View className="flex flex-1 content-center px-4 mt-2 mb-8 border-2 bg-slate-100 dark:bg-slate-900 bg-transparent">
           <View className="flex w-full p-2 rounded-lg bg-slate-700">
-
-            <Text className="text-xl font-thin px-3 py-5 text-white">Mudar para feed</Text>
+            <Text className="text-xl font-thin px-3 py-5 text-white">
+              Mudar para feed
+            </Text>
 
             <ScrollView>
-              
               {options.map(({ label, value }) => (
                 <TouchableOpacity
                   key={value}
@@ -53,17 +59,18 @@ export default function Select({selected, options, handleOnChange}: SelectProps)
                   className="p-1 border-b-2 border-gray-200"
                   //style={{ borderColor: theme.foreground600 }}
                 >
-                  <Text 
+                  <Text
                     className="text-xl font-thin text-white"
                     //style={{ color: theme.foreground500 }}
-                  >{label}</Text>
+                  >
+                    {label}
+                  </Text>
                 </TouchableOpacity>
               ))}
             </ScrollView>
           </View>
         </View>
       </Modal>
-
-    </View >
+    </View>
   );
 }

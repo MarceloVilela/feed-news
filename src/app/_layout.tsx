@@ -1,102 +1,66 @@
-import { View } from 'react-native';
-import { styled, useColorScheme } from 'nativewind';
-import { slate } from 'tailwindcss/colors';
+import { ActivityIndicator, View } from "react-native";
+import { useColorScheme } from "nativewind";
+//import { styled } from "nativewind";
+import { slate } from "tailwindcss/colors";
 
-import { SplashScreen } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from '@expo/vector-icons/Feather';
+// @ts-ignore
+import "../../global.css";
 
-import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
+import { StatusBar } from "expo-status-bar";
+import { Stack } from "expo-router";
 
-import { BaiJamjuree_700Bold } from '@expo-google-fonts/bai-jamjuree';
+import {
+  useFonts,
+  Roboto_400Regular,
+  Roboto_700Bold,
+} from "@expo-google-fonts/roboto";
 
-import { SettingsProvider } from '@/contexts/Settings';
-import ArticlesTech from '@/app/tech/articles/[origin]';
-import ArticlesGame from '@/app/game/articles/[origin]';
-import Article from '@/app/article';
+import { BaiJamjuree_700Bold } from "@expo-google-fonts/bai-jamjuree";
 
-import { origins as techOrigins } from '@/assets/json/tech/origins.json';
-import { origins as gameOrigins } from '@/assets/json/game/origins.json';
-import Stripes from '@/assets/stripes.svg';
+import { SettingsProvider } from "@/contexts/Settings";
+import Article from "@/app/article";
 
-const StyledStripes = styled(Stripes);
-
-const Tab = createBottomTabNavigator();
+import { origins as techOrigins } from "@/assets/json/tech/origins.json";
+import { origins as gameOrigins } from "@/assets/json/game/origins.json";
 
 export default function Layout() {
-    const { colorScheme } = useColorScheme();
+  const { colorScheme, setColorScheme } = useColorScheme();
+  setColorScheme("dark");
 
-    const [hasLoadedFonts] = useFonts({
-        Roboto_400Regular,
-        Roboto_700Bold,
-        BaiJamjuree_700Bold,
-    });
+  const [hasLoadedFonts] = useFonts({
+    Roboto_400Regular,
+    Roboto_700Bold,
+    BaiJamjuree_700Bold,
+  });
 
-    if (!hasLoadedFonts) {
-        return <SplashScreen />;
-    }
-
+  if (!hasLoadedFonts) {
+    //return <SplashScreen />;
     return (
-        <SettingsProvider origin={techOrigins[0].title} originGame={gameOrigins[0].title}>
-            <View
-                // source={blurBg}
-                // imageStyle={{ position: 'absolute', left: '-100%' }}
-                className="relative flex-1 bg-slate-50 dark:bg-slate-900"
-            >
-                <StyledStripes className="absolute left-2" />
-                <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} translucent />
-
-                {/* <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: 'transparent' },
-          animation: 'fade',
-        }}
-      >
-        <Stack.Screen name="index" redirect={isUserAuthenticated} />
-        <Stack.Screen name="memories" />
-        <Stack.Screen name="new" />
-      </Stack> */}
-
-                <Tab.Navigator
-                    sceneContainerStyle={{ backgroundColor: 'transparent' }}
-                    screenOptions={{
-                        headerShown: false,
-                        tabBarStyle: { backgroundColor: slate['100'] },
-                        tabBarActiveTintColor: slate['500'],
-                        tabBarInactiveTintColor: slate['300'],
-                    }}
-                >
-                    <Tab.Screen
-                        name="tech/articles/[origin]"
-                        component={ArticlesTech}
-                        options={{
-                            tabBarLabel: 'Tech',
-                            tabBarIcon: ({ color, size }) => (
-                                <Icon name="monitor" size={size} color={color} />
-                            ),
-                        }}
-                    />
-                    <Tab.Screen
-                        name="game/articles/[origin]"
-                        component={ArticlesGame}
-                        options={{
-                            tabBarLabel: 'Game',
-                            tabBarIcon: ({ color, size }) => (
-                                <Icon name="twitch" size={size} color={color} />
-                            ),
-                        }}
-                    />
-                    <Tab.Screen
-                        name="article"
-                        component={Article}
-                        options={{
-                            tabBarButton: () => null,
-                        }}
-                    />
-                </Tab.Navigator>
-            </View>
-        </SettingsProvider>
+      <View className="flex-1 justify-center dark">
+        <ActivityIndicator size="large" />
+      </View>
     );
+  }
+
+  return (
+    <SettingsProvider
+      origin={techOrigins[0].title}
+      originGame={gameOrigins[0].title}
+    >
+      <View
+        style={{ flex: 1 }}
+        className="relative flex-1 bg-slate-100 dark:bg-slate-900"
+      >
+        <StatusBar
+          style={colorScheme === "dark" ? "light" : "dark"}
+          translucent
+        />
+
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="article" />
+        </Stack>
+      </View>
+    </SettingsProvider>
+  );
 }
