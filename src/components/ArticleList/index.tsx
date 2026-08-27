@@ -1,43 +1,43 @@
-import { useMemo } from "react";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
-import { useRouter } from "expo-router";
-import { slate } from "tailwindcss/colors";
-import Icon from "@expo/vector-icons/Feather";
-import dayjs from "dayjs";
-import ptBR from "dayjs/locale/pt-br";
+import { useMemo } from 'react'
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
+import { useRouter } from 'expo-router'
+import { slate } from 'tailwindcss/colors'
+import Icon from '@expo/vector-icons/Feather'
+import dayjs from 'dayjs'
+import ptBR from 'dayjs/locale/pt-br'
 
-import { Content } from "@/app/(tabs)/tech/articles/[origin]";
-import { GridImage, HeroCard, NewsCard, PlaylistItem, PostCard } from "../Card";
+import { Content } from '@/app/(tabs)/tech/articles/[origin]'
+import { GridImage, HeroCard, NewsCard, PlaylistItem, PostCard } from '../Card'
 
-dayjs.locale(ptBR);
+dayjs.locale(ptBR)
 
 interface ArticleCardWithImageProps {
-  articles: Content[];
+  articles: Content[]
 }
 
-type LayoutType = "news" | "grid" | "post" | "hero" | "playlist";
+type LayoutType = 'news' | 'grid' | 'post' | 'hero' | 'playlist'
 
 type RenderCardProps = {
-  item: Content;
-  layout: LayoutType;
-  onPress: (url: string) => void;
-};
+  item: Content
+  layout: LayoutType
+  onPress: (url: string) => void
+}
 
 const renderCard = ({ layout, item, onPress }: RenderCardProps) => {
   switch (layout) {
-    case "grid":
+    case 'grid':
       return (
         <GridImage
           item={{
             image: item.thumb,
           }}
           onPress={() => {
-            console.warn("AQUI");
-            onPress(item.link);
+            console.warn('AQUI')
+            onPress(item.link)
           }}
         />
-      );
-    case "hero":
+      )
+    case 'hero':
       return (
         <HeroCard
           item={{
@@ -49,12 +49,12 @@ const renderCard = ({ layout, item, onPress }: RenderCardProps) => {
             //source: item.title,
           }}
           onPress={() => {
-            console.warn("AQUI");
-            onPress(item.link);
+            console.warn('AQUI')
+            onPress(item.link)
           }}
         />
-      );
-    case "news":
+      )
+    case 'news':
       return (
         <NewsCard
           item={{
@@ -64,8 +64,8 @@ const renderCard = ({ layout, item, onPress }: RenderCardProps) => {
           }}
           onPress={() => onPress(item.link)}
         />
-      );
-    case "playlist":
+      )
+    case 'playlist':
       return (
         <PlaylistItem
           item={{
@@ -77,12 +77,12 @@ const renderCard = ({ layout, item, onPress }: RenderCardProps) => {
             duration: Math.floor(Math.random() * 1000) + 1,
           }}
           onPress={() => {
-            console.warn("AQUI");
-            onPress(item.link);
+            console.warn('AQUI')
+            onPress(item.link)
           }}
         />
-      );
-    case "post":
+      )
+    case 'post':
       return (
         <PostCard
           item={{
@@ -94,18 +94,18 @@ const renderCard = ({ layout, item, onPress }: RenderCardProps) => {
             caption: item.link,
           }}
           onPress={() => {
-            console.warn("AQUI");
-            onPress(item.link);
+            console.warn('AQUI')
+            onPress(item.link)
           }}
         />
-      );
+      )
     default:
       return (
         <TouchableOpacity className="mb-4" onPress={() => onPress(item.link)}>
           <View className="hidden flex-row items-center">
             <View className="h-px w-5 bg-gray-50" />
             <Text className="font-body text-sm text-gray-100">
-              {dayjs(item.posted_at).format("D[ de ]MMMM[, ]YYYY")}
+              {dayjs(item.posted_at).format('D[ de ]MMMM[, ]YYYY')}
             </Text>
           </View>
           <View className="space-y-4 px-0">
@@ -123,40 +123,40 @@ const renderCard = ({ layout, item, onPress }: RenderCardProps) => {
                 <Text className="font-body text-md text-blue-700 dark:text-slate-300">
                   Ler mais
                 </Text>
-                <Icon name="arrow-right" size={16} color={slate["700"]} />
+                <Icon name="arrow-right" size={16} color={slate['700']} />
               </TouchableOpacity>
             </View>
           </View>
         </TouchableOpacity>
-      );
+      )
   }
-};
+}
 
 export default function ArticleList({ articles }: ArticleCardWithImageProps) {
-  const router = useRouter();
+  const router = useRouter()
 
   const _articles = useMemo(() => {
     //return [...new Set(articles)];
-    if (typeof articles != "object") {
-      return [];
+    if (typeof articles != 'object') {
+      return []
     }
     return articles.filter(
       (value, index, self) =>
-        self.findIndex((v) => v["id"] === value["id"]) === index,
-    );
-  }, [articles]);
+        self.findIndex((v) => v['id'] === value['id']) === index,
+    )
+  }, [articles])
 
   const handleSeeMore = (url: string) =>
-    router.push(`/article?url=${encodeURIComponent(url)}`);
+    router.push(`/article?url=${encodeURIComponent(url)}`)
 
   return (
     <FlatList
       data={_articles}
       keyExtractor={(item) => String(item.id)}
       renderItem={({ item }) =>
-        renderCard({ layout: "news", item, onPress: handleSeeMore })
+        renderCard({ layout: 'news', item, onPress: handleSeeMore })
       }
       showsVerticalScrollIndicator={false}
     />
-  );
+  )
 }

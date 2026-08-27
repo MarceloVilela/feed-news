@@ -1,16 +1,16 @@
-import { Image, Pressable, PressableProps, Text, View } from "react-native";
+import { Image, Pressable, PressableProps, Text, View } from 'react-native'
 
 export type Item = {
-  title: String;
-  image: String;
-  summary: String;
-  time?: Number;
-  source?: String;
-};
+  title: String
+  image: String
+  summary: String
+  time?: Number
+  source?: String
+}
 
 export type NewsCardProps = PressableProps & {
-  item: Item;
-};
+  item: Item
+}
 
 export default function NewsCard({ item, ...rest }: NewsCardProps) {
   return (
@@ -44,5 +44,5 @@ export default function NewsCard({ item, ...rest }: NewsCardProps) {
         resizeMode="cover"
       />
     </Pressable>
-  );
+  )
 }

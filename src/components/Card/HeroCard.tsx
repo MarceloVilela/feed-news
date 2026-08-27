@@ -1,17 +1,17 @@
-import { Image, Pressable, PressableProps, Text, View } from "react-native";
+import { Image, Pressable, PressableProps, Text, View } from 'react-native'
 
 export type Item = {
-  title: String;
-  image: String;
-  summary: String;
-  category?: String;
-  time?: String;
-  source?: String;
-};
+  title: String
+  image: String
+  summary: String
+  category?: String
+  time?: String
+  source?: String
+}
 
 export type HeroCardProps = PressableProps & {
-  item: Item;
-};
+  item: Item
+}
 
 export default function HeroCard({ item, ...rest }: HeroCardProps) {
   return (
@@ -43,5 +43,5 @@ export default function HeroCard({ item, ...rest }: HeroCardProps) {
         )}
       </View>
     </Pressable>
-  );
+  )
 }

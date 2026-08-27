@@ -1,14 +1,14 @@
-import { FlatList, Image, Pressable, Text, View } from "react-native";
-import { useRouter } from "expo-router";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { FlatList, Image, Pressable, Text, View } from 'react-native'
+import { useRouter } from 'expo-router'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import posts from "@/assets/json/posts.json";
-import { GridImage } from "@/components/Card";
+import posts from '@/assets/json/posts.json'
+import { GridImage } from '@/components/Card'
 
 export default function Social() {
-  const { bottom, top } = useSafeAreaInsets();
+  const { bottom, top } = useSafeAreaInsets()
 
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <View
@@ -23,5 +23,5 @@ export default function Social() {
         showsVerticalScrollIndicator={false}
       />
     </View>
-  );
+  )
 }

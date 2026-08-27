@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "feed-expo54",
-    "slug": "feed-expo54",
+    "name": "feed-news",
+    "slug": "feed-news",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",

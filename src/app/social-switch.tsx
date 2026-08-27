@@ -1,37 +1,37 @@
-import { ComponentProps, useState } from "react";
-import { FlatList, Image, Pressable, Text, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useRouter } from "expo-router";
-import Icon from "@expo/vector-icons/Feather";
+import { ComponentProps, useState } from 'react'
+import { FlatList, Image, Pressable, Text, View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useRouter } from 'expo-router'
+import Icon from '@expo/vector-icons/Feather'
 
-import _posts from "@/assets/json/posts.json";
-import { HeroCard, NewsCard, PostCard, PlaylistItem } from "@/components/Card";
-import colors from "tailwindcss/colors";
+import _posts from '@/assets/json/posts.json'
+import { HeroCard, NewsCard, PostCard, PlaylistItem } from '@/components/Card'
+import colors from 'tailwindcss/colors'
 
 type Data = {
-  id: Number;
-  title: String;
-  slug: String;
-  imageAltText: String;
-  cover: String;
-};
-const posts = { data: _posts.data as Data[] };
+  id: Number
+  title: String
+  slug: String
+  imageAltText: String
+  cover: String
+}
+const posts = { data: _posts.data as Data[] }
 
 // 1. Define the layout map
-type IconName = ComponentProps<typeof Icon>["name"];
-type LayoutType = "news" | "grid" | "post" | "hero" | "song";
+type IconName = ComponentProps<typeof Icon>['name']
+type LayoutType = 'news' | 'grid' | 'post' | 'hero' | 'song'
 
 const LAYOUTS: { icon: IconName; type: LayoutType }[] = [
-  { icon: "paperclip", type: "news" },
-  { icon: "divide-square", type: "hero" },
-  { icon: "instagram", type: "post" },
-  { icon: "music", type: "song" },
-];
+  { icon: 'paperclip', type: 'news' },
+  { icon: 'divide-square', type: 'hero' },
+  { icon: 'instagram', type: 'post' },
+  { icon: 'music', type: 'song' },
+]
 
 // 2. Layout rendering component
 const renderCard = (item: Data, layout: LayoutType) => {
   switch (layout) {
-    case "post":
+    case 'post':
       return (
         <PostCard
           item={{
@@ -42,8 +42,8 @@ const renderCard = (item: Data, layout: LayoutType) => {
             caption: item.imageAltText,
           }}
         />
-      );
-    case "news":
+      )
+    case 'news':
       return (
         <NewsCard
           item={{
@@ -54,8 +54,8 @@ const renderCard = (item: Data, layout: LayoutType) => {
             source: item.slug,
           }}
         />
-      );
-    case "song":
+      )
+    case 'song':
       return (
         <PlaylistItem
           item={{
@@ -67,7 +67,7 @@ const renderCard = (item: Data, layout: LayoutType) => {
             duration: item.id,
           }}
         />
-      );
+      )
     default:
       return (
         <HeroCard
@@ -80,16 +80,16 @@ const renderCard = (item: Data, layout: LayoutType) => {
             source: item.slug,
           }}
         />
-      );
+      )
   }
-};
+}
 
 export default function SocialSwitch() {
-  const { bottom, top } = useSafeAreaInsets();
+  const { bottom, top } = useSafeAreaInsets()
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const [layout, setLayout] = useState<LayoutType>("news");
+  const [layout, setLayout] = useState<LayoutType>('news')
 
   return (
     <View
@@ -103,7 +103,7 @@ export default function SocialSwitch() {
             <Icon
               name={icon}
               size={32}
-              color={layout === type ? colors.blue[500] : "#CCC"}
+              color={layout === type ? colors.blue[500] : '#CCC'}
             />
           </Pressable>
         ))}
@@ -116,5 +116,5 @@ export default function SocialSwitch() {
         showsVerticalScrollIndicator={false}
       />
     </View>
-  );
+  )
 }

@@ -1,19 +1,19 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from 'react'
 
 interface SettingsContextData {
-  origin: string;
-  originChange: (value: string) => void;
-  originGame: string;
-  originGameChange: (value: string) => void;
+  origin: string
+  originChange: (value: string) => void
+  originGame: string
+  originGameChange: (value: string) => void
 }
 
 interface SettingsProviderProps {
-  children: ReactNode;
-  origin: string;
-  originGame: string;
+  children: ReactNode
+  origin: string
+  originGame: string
 }
 
-export const SettingsContext = createContext({} as SettingsContextData);
+export const SettingsContext = createContext({} as SettingsContextData)
 
 export function SettingsProvider({
   children,
@@ -21,15 +21,15 @@ export function SettingsProvider({
   originGame: originGameParam,
   ...rest
 }: SettingsProviderProps) {
-  const [origin, setOrigin] = useState(originParam);
-  const [originGame, setOriginGame] = useState(originGameParam);
+  const [origin, setOrigin] = useState(originParam)
+  const [originGame, setOriginGame] = useState(originGameParam)
 
   function originChange(value: string) {
-    setOrigin(value);
+    setOrigin(value)
   }
 
   function originGameChange(value: string) {
-    setOriginGame(value);
+    setOriginGame(value)
   }
 
   return (
@@ -43,5 +43,5 @@ export function SettingsProvider({
     >
       {children}
     </SettingsContext.Provider>
-  );
+  )
 }

@@ -1,18 +1,18 @@
-import { Image, Pressable, PressableProps, Text, View } from "react-native";
+import { Image, Pressable, PressableProps, Text, View } from 'react-native'
 
-import posts from "@/assets/json/posts.json";
+import posts from '@/assets/json/posts.json'
 
 export type Item = {
-  user: String;
-  avatar: String;
-  image: String;
-  likes?: Number;
-  caption: String;
-};
+  user: String
+  avatar: String
+  image: String
+  likes?: Number
+  caption: String
+}
 
 export type PostCardProps = PressableProps & {
-  item: Item;
-};
+  item: Item
+}
 
 export default function PostCard({ item, ...rest }: PostCardProps) {
   return (
@@ -63,5 +63,5 @@ export default function PostCard({ item, ...rest }: PostCardProps) {
         </Text>
       </View>
     </Pressable>
-  );
+  )
 }

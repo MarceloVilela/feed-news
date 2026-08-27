@@ -1,0 +1,13 @@
+{
+  "extends": ["@arthurrios/biome-config/react"],
+  "files": {
+    "includes": [
+      "src/**",
+      "App.tsx",
+      "index.ts",
+      "env.example.ts",
+      "!src-48/**",
+      "!src/Select-/**"
+    ]
+  }
+}

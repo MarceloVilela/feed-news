@@ -1,15 +1,15 @@
-import { FlatList, View } from "react-native";
-import { useRouter } from "expo-router";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Icon from "@expo/vector-icons/Feather";
+import { FlatList, View } from 'react-native'
+import { useRouter } from 'expo-router'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import Icon from '@expo/vector-icons/Feather'
 
-import posts from "@/assets/json/posts.json";
-import { NewsCard } from "@/components/Card";
+import posts from '@/assets/json/posts.json'
+import { NewsCard } from '@/components/Card'
 
 export default function Social() {
-  const { bottom, top } = useSafeAreaInsets();
+  const { bottom, top } = useSafeAreaInsets()
 
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <View
@@ -33,5 +33,5 @@ export default function Social() {
         showsVerticalScrollIndicator={false}
       />
     </View>
-  );
+  )
 }

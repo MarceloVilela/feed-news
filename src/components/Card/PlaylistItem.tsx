@@ -1,17 +1,17 @@
-import { Pressable, PressableProps, Text, View } from "react-native";
+import { Pressable, PressableProps, Text, View } from 'react-native'
 
 export type Item = {
-  index: Number;
-  title: String;
-  avatar: String;
-  image: String;
-  artist: String;
-  duration: Number;
-};
+  index: Number
+  title: String
+  avatar: String
+  image: String
+  artist: String
+  duration: Number
+}
 
 export type PlaylistItemProps = PressableProps & {
-  item: Item;
-};
+  item: Item
+}
 
 export default function PlaylistItem({ item, ...rest }: PlaylistItemProps) {
   return (
@@ -30,5 +30,5 @@ export default function PlaylistItem({ item, ...rest }: PlaylistItemProps) {
         <Text className="text-zinc-500">{` ${item.duration}`}</Text>
       </View>
     </Pressable>
-  );
+  )
 }
