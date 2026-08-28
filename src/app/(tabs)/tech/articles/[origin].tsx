@@ -1,5 +1,5 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import env from '@/../env'
 import { origins } from '@/assets/json/tech/origins.json'
@@ -33,6 +33,8 @@ export default function TechArticles() {
 
   const [articles, setArticles] = useState<Content[]>([])
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const lastGoodOrigin = useRef<string | null>(null)
 
   const loadArticles = useCallback(() => {
     async function load() {
@@ -43,19 +45,27 @@ export default function TechArticles() {
       }
 
       setLoading(true)
-      // api.defaults.baseURL + `/tech/source?url=${url}`
-      const response = await api.get<NewsResponse>(`/tech/source?url=${url}`)
-      setLoading(false)
-
-      setArticles(response.data.data)
+      setError(false)
+      try {
+        // api.defaults.baseURL + `/tech/source?url=${url}`
+        const response = await api.get<NewsResponse>(`/tech/source?url=${url}`)
+        setArticles(response.data.data)
+        lastGoodOrigin.current = origin
+      } catch {
+        setError(true)
+      } finally {
+        setLoading(false)
+      }
     }
     load()
   }, [origin])
 
   async function loadPlaceholder() {
     setLoading(true)
+    setError(false)
     await delay(1000)
     setArticles(placeholder.data)
+    lastGoodOrigin.current = origin
     setLoading(false)
   }
 
@@ -65,7 +75,7 @@ export default function TechArticles() {
 
   return (
     <View
-      className="flex-1 px-2 gap-2 bg-slate-100 dark:bg-slate-900"
+      className="flex-1 px-2 gap-2 bg-background dark:bg-background-dark"
       style={{ paddingBottom: bottom, paddingTop: top }}
     >
       <Select
@@ -77,6 +87,34 @@ export default function TechArticles() {
       {loading ? (
         <View className="flex-1 justify-center">
           <ActivityIndicator size="large" />
+        </View>
+      ) : error ? (
+        <View className="flex-1 items-center justify-center gap-3 px-6">
+          <Text className="text-center text-base text-text-primary dark:text-text-primary-dark">
+            Não foi possível carregar essa fonte agora.
+          </Text>
+          <TouchableOpacity
+            onPress={loadArticles}
+            accessibilityRole="button"
+            accessibilityLabel="Tentar carregar essa fonte de novo"
+            className="rounded-lg border-2 border-border px-4 py-2"
+          >
+            <Text className="text-text-primary dark:text-text-primary-dark">
+              Tentar de novo
+            </Text>
+          </TouchableOpacity>
+          {lastGoodOrigin.current && lastGoodOrigin.current !== origin && (
+            <TouchableOpacity
+              onPress={() => originChange(lastGoodOrigin.current as string)}
+              accessibilityRole="button"
+              accessibilityLabel={`Voltar para a fonte anterior, ${lastGoodOrigin.current}`}
+              className="rounded-lg px-4 py-2"
+            >
+              <Text className="text-text-primary dark:text-text-primary-dark underline">
+                Voltar para {lastGoodOrigin.current}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       ) : (
         <ArticleList articles={articles} />

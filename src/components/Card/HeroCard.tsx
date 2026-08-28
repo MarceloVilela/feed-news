@@ -17,27 +17,30 @@ export default function HeroCard({ item, ...rest }: HeroCardProps) {
   return (
     <Pressable
       {...rest}
-      className="mx-4 mb-4 rounded-3xl overflow-hidden bg-slate-100 dark:bg-slate-900"
+      accessibilityRole="button"
+      accessibilityLabel={item.title}
+      className="mx-4 mb-4 rounded-3xl overflow-hidden bg-background dark:bg-background-dark"
     >
       <Image
         source={{ uri: `${item.image}` }}
+        accessible={false}
         className="w-full h-52"
         resizeMode="cover"
       />
       <View className="p-4">
         {item.category && (
-          <Text className="text-xs text-blue-500 font-semibold mb-2">
+          <Text className="text-xs text-accent font-semibold mb-2">
             {item.category}
           </Text>
         )}
-        <Text className="text-xl font-bold leading-6 mb-2 text-zinc-900 dark:text-zinc-100">
+        <Text className="text-xl font-bold leading-6 mb-2 text-hero-title dark:text-hero-title-dark">
           {item.title}
         </Text>
-        <Text className="mb-3 text-zinc-600 dark:text-zinc-300">
+        <Text className="mb-3 text-hero-summary dark:text-hero-summary-dark">
           {item.summary}
         </Text>
         {item.time && item.source && (
-          <Text className="text-zinc-400 dark:text-zinc-400 text-sm">
+          <Text className="text-hero-meta dark:text-hero-meta text-sm">
             {item.source} · {item.time}
           </Text>
         )}

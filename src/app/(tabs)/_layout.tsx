@@ -2,7 +2,7 @@ import Icon from '@expo/vector-icons/Feather'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useColorScheme } from 'nativewind'
 import { View } from 'react-native'
-import colors, { slate } from 'tailwindcss/colors'
+import { colors } from '@/styles/colors'
 import ArticlesGame from './game/articles/[origin]'
 import ArticlesTech from './tech/articles/[origin]'
 
@@ -18,10 +18,12 @@ export default function TabsLayout() {
           headerShown: false,
           tabBarStyle: {
             backgroundColor:
-              colorScheme === 'dark' ? slate['900'] : slate['100'],
+              colorScheme === 'dark'
+                ? colors['background-dark']
+                : colors.background,
           },
-          tabBarActiveTintColor: colors.blue['500'],
-          tabBarInactiveTintColor: slate['300'],
+          tabBarActiveTintColor: colors.accent,
+          tabBarInactiveTintColor: colors['tab-inactive'],
         }}
       >
         <Tab.Screen

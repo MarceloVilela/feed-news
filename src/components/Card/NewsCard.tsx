@@ -16,23 +16,25 @@ export default function NewsCard({ item, ...rest }: NewsCardProps) {
   return (
     <Pressable
       {...rest}
-      className="mx-4 mb-3 p-3 rounded-2xl flex-row bg-slate-100 dark:bg-slate-900"
+      accessibilityRole="button"
+      accessibilityLabel={item.title}
+      className="mx-4 mb-3 p-3 rounded-2xl flex-row bg-background dark:bg-background-dark"
     >
       <View className="flex-1 pr-3">
         <Text
-          className="font-semibold text-base mb-1 text-zinc-600 dark:text-zinc-100"
+          className="font-semibold text-base mb-1 text-news-title dark:text-news-title-dark"
           numberOfLines={2}
         >
           {item.title}
         </Text>
         <Text
-          className="text-sm mb-2 text-zinc-500 dark:text-zinc-200"
+          className="text-sm mb-2 text-news-summary dark:text-news-summary-dark"
           numberOfLines={2}
         >
           {item.summary}
         </Text>
         {item.source && item.time && (
-          <Text className="text-xs text-zinc-400 dark:text-zinc-300">
+          <Text className="text-xs text-news-meta dark:text-news-meta-dark">
             {item.source} · {`${item.time}`}
           </Text>
         )}
@@ -40,6 +42,7 @@ export default function NewsCard({ item, ...rest }: NewsCardProps) {
 
       <Image
         source={{ uri: `${item.image}` }}
+        accessible={false}
         className="w-24 h-24 rounded-xl"
         resizeMode="cover"
       />

@@ -4,9 +4,9 @@ import ptBR from 'dayjs/locale/pt-br'
 import { useRouter } from 'expo-router'
 import { useMemo } from 'react'
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
-import { slate } from 'tailwindcss/colors'
 
 import { Content } from '@/app/(tabs)/tech/articles/[origin]'
+import { colors } from '@/styles/colors'
 import { uniqueById } from '@/utils/uniqueById'
 import { GridImage, HeroCard, NewsCard, PlaylistItem, PostCard } from '../Card'
 
@@ -102,10 +102,15 @@ const renderCard = ({ layout, item, onPress }: RenderCardProps) => {
       )
     default:
       return (
-        <TouchableOpacity className="mb-4" onPress={() => onPress(item.link)}>
+        <TouchableOpacity
+          className="mb-4"
+          accessibilityRole="button"
+          accessibilityLabel={item.title}
+          onPress={() => onPress(item.link)}
+        >
           <View className="hidden flex-row items-center">
-            <View className="h-px w-5 bg-gray-50" />
-            <Text className="font-body text-sm text-gray-100">
+            <View className="h-px w-5 bg-dot-muted" />
+            <Text className="font-body text-sm text-text-faint">
               {dayjs(item.posted_at).format('D[ de ]MMMM[, ]YYYY')}
             </Text>
           </View>
@@ -113,18 +118,28 @@ const renderCard = ({ layout, item, onPress }: RenderCardProps) => {
             <Image
               source={{ uri: item.thumb }}
               className="aspect-video w-full rounded-lg"
+              accessible={false}
               alt=""
             />
             <View className="px-2">
-              <Text className="font-body text-xl leading-relaxed text-slate-900 dark:text-slate-100">
+              <Text className="font-body text-xl leading-relaxed text-text-primary dark:text-text-primary-dark">
                 {item.title}
               </Text>
 
-              <TouchableOpacity className="flex-row items-center gap-2">
-                <Text className="font-body text-md text-blue-700 dark:text-slate-300">
+              <TouchableOpacity
+                className="flex-row items-center gap-2"
+                accessibilityRole="button"
+                accessibilityLabel="Ler mais"
+                onPress={() => onPress(item.link)}
+              >
+                <Text className="font-body text-md text-link dark:text-link-dark">
                   Ler mais
                 </Text>
-                <Icon name="arrow-right" size={16} color={slate['700']} />
+                <Icon
+                  name="arrow-right"
+                  size={16}
+                  color={colors['icon-link']}
+                />
               </TouchableOpacity>
             </View>
           </View>

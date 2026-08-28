@@ -1,4 +1,5 @@
 import { useColorScheme } from 'nativewind'
+import { useEffect, useRef } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 
 import '../../global.css'
@@ -18,7 +19,17 @@ import { SettingsProvider } from '@/contexts/Settings'
 
 export default function Layout() {
   const { colorScheme, setColorScheme } = useColorScheme()
-  setColorScheme('dark')
+
+  // Dark é o tema padrão ao abrir o app — a ref garante que roda uma única vez
+  // mesmo que `setColorScheme` não seja uma referência estável entre renders
+  // (senão o efeito reforça 'dark' de novo a cada toggle, cancelando o Select).
+  const hasSetInitialTheme = useRef(false)
+  useEffect(() => {
+    if (!hasSetInitialTheme.current) {
+      hasSetInitialTheme.current = true
+      setColorScheme('dark')
+    }
+  }, [setColorScheme])
 
   const [hasLoadedFonts] = useFonts({
     Roboto_400Regular,
@@ -29,7 +40,7 @@ export default function Layout() {
   if (!hasLoadedFonts) {
     //return <SplashScreen />;
     return (
-      <View className="flex-1 justify-center dark">
+      <View className="flex-1 justify-center bg-background dark:bg-background-dark">
         <ActivityIndicator size="large" />
       </View>
     )
@@ -42,7 +53,7 @@ export default function Layout() {
     >
       <View
         style={{ flex: 1 }}
-        className="relative flex-1 bg-slate-100 dark:bg-slate-900"
+        className="relative flex-1 bg-background dark:bg-background-dark"
       >
         <StatusBar
           style={colorScheme === 'dark' ? 'light' : 'dark'}

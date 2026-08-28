@@ -73,9 +73,12 @@ presentational card layouts in `src/components/Card` (`NewsCard`, `HeroCard`, `G
 
 **Styling**: NativeWind v4 (`className` on RN components), Tailwind config content-scanned
 over `App.tsx`, `components/**`, and `src/**`. Global stylesheet is `global.css`, wired into
-Metro via `withNativeWind` in `metro.config.js`. Dark mode is force-enabled in
-`src/app/_layout.tsx` (`setColorScheme("dark")`); most components use `dark:` variants
-alongside light-mode classes even though light mode is effectively unreachable right now.
+Metro via `withNativeWind` in `metro.config.js`. Colors are centralized in
+`src/styles/colors.ts` (named tokens, e.g. `background`/`background-dark`), extended into
+`theme.colors` in `tailwind.config.js` (`darkMode: "class"`) instead of raw Tailwind palette
+classes (`slate-900`, `zinc-400`...) in JSX. Theme follows the OS color scheme via NativeWind's
+`useColorScheme()` — nothing forces a single scheme anymore; both light and dark are reachable
+at runtime.
 
 **Path alias**: `@/*` → `src/*` (see `tsconfig.json`).
 
