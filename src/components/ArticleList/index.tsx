@@ -7,6 +7,7 @@ import dayjs from 'dayjs'
 import ptBR from 'dayjs/locale/pt-br'
 
 import { Content } from '@/app/(tabs)/tech/articles/[origin]'
+import { uniqueById } from '@/utils/uniqueById'
 import { GridImage, HeroCard, NewsCard, PlaylistItem, PostCard } from '../Card'
 
 dayjs.locale(ptBR)
@@ -135,16 +136,7 @@ const renderCard = ({ layout, item, onPress }: RenderCardProps) => {
 export default function ArticleList({ articles }: ArticleCardWithImageProps) {
   const router = useRouter()
 
-  const _articles = useMemo(() => {
-    //return [...new Set(articles)];
-    if (typeof articles != 'object') {
-      return []
-    }
-    return articles.filter(
-      (value, index, self) =>
-        self.findIndex((v) => v['id'] === value['id']) === index,
-    )
-  }, [articles])
+  const _articles = useMemo(() => uniqueById(articles), [articles])
 
   const handleSeeMore = (url: string) =>
     router.push(`/article?url=${encodeURIComponent(url)}`)
