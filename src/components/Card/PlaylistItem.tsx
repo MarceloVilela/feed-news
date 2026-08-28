@@ -1,12 +1,12 @@
 import { Pressable, PressableProps, Text, View } from 'react-native'
 
 export type Item = {
-  index: Number
-  title: String
-  avatar: String
-  image: String
-  artist: String
-  duration: Number
+  index: number
+  title: string
+  avatar: string
+  image: string
+  artist: string
+  duration: number
 }
 
 export type PlaylistItemProps = PressableProps & {

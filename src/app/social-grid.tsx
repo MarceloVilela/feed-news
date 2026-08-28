@@ -1,5 +1,4 @@
-import { FlatList, Image, Pressable, Text, View } from 'react-native'
-import { useRouter } from 'expo-router'
+import { FlatList, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import posts from '@/assets/json/posts.json'
@@ -7,8 +6,6 @@ import { GridImage } from '@/components/Card'
 
 export default function Social() {
   const { bottom, top } = useSafeAreaInsets()
-
-  const router = useRouter()
 
   return (
     <View

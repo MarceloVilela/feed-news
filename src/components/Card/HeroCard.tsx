@@ -1,12 +1,12 @@
 import { Image, Pressable, PressableProps, Text, View } from 'react-native'
 
 export type Item = {
-  title: String
-  image: String
-  summary: String
-  category?: String
-  time?: String
-  source?: String
+  title: string
+  image: string
+  summary: string
+  category?: string
+  time?: string
+  source?: string
 }
 
 export type HeroCardProps = PressableProps & {

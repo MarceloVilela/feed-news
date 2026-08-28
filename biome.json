@@ -6,8 +6,8 @@
       "App.tsx",
       "index.ts",
       "env.example.ts",
-      "!src-48/**",
-      "!src/Select-/**"
+      "!src-48",
+      "!src/Select-"
     ]
   }
 }

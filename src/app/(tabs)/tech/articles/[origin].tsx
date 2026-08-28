@@ -1,16 +1,14 @@
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-
-import { api } from '@/lib/api'
-import delay from '@/utils/delay'
-import { SettingsContext } from '@/contexts/Settings'
-import Select from '@/components/Select'
-import ArticleList from '@/components/ArticleList'
-
+import env from '@/../env'
 import { origins } from '@/assets/json/tech/origins.json'
 import placeholder from '@/assets/json/tech/placeholder.json'
-import env from '@/../env'
+import ArticleList from '@/components/ArticleList'
+import Select from '@/components/Select'
+import { SettingsContext } from '@/contexts/Settings'
+import { api } from '@/lib/api'
+import delay from '@/utils/delay'
 
 const options = origins.map(({ title, url }) => ({ label: title, value: url }))
 

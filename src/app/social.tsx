@@ -1,15 +1,11 @@
 import { FlatList, View } from 'react-native'
-import { useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import Icon from '@expo/vector-icons/Feather'
 
 import posts from '@/assets/json/posts.json'
 import { NewsCard } from '@/components/Card'
 
 export default function Social() {
   const { bottom, top } = useSafeAreaInsets()
-
-  const router = useRouter()
 
   return (
     <View

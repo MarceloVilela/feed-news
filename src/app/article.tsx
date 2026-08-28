@@ -1,10 +1,10 @@
+import Icon from '@expo/vector-icons/Feather'
+//import base64 from "base-64";
+import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useCallback, useEffect } from 'react'
 import { Alert, Linking, Text, TouchableOpacity, View } from 'react-native'
-import WebView from 'react-native-webview'
-//import base64 from "base-64";
-import { useRouter, useLocalSearchParams } from 'expo-router'
-import Icon from '@expo/vector-icons/Feather'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import WebView from 'react-native-webview'
 import { slate } from 'tailwindcss/colors'
 
 export default function Article() {

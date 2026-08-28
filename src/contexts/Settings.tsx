@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import { createContext, ReactNode, useState } from 'react'
 
 interface SettingsContextData {
   origin: string
@@ -19,7 +19,6 @@ export function SettingsProvider({
   children,
   origin: originParam,
   originGame: originGameParam,
-  ...rest
 }: SettingsProviderProps) {
   const [origin, setOrigin] = useState(originParam)
   const [originGame, setOriginGame] = useState(originGameParam)

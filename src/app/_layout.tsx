@@ -1,27 +1,20 @@
-import { ActivityIndicator, View } from 'react-native'
 import { useColorScheme } from 'nativewind'
-//import { styled } from "nativewind";
-import { slate } from 'tailwindcss/colors'
+import { ActivityIndicator, View } from 'react-native'
 
-// @ts-ignore
 import '../../global.css'
 
-import { StatusBar } from 'expo-status-bar'
-import { Stack } from 'expo-router'
-
+import { BaiJamjuree_700Bold } from '@expo-google-fonts/bai-jamjuree'
 import {
-  useFonts,
   Roboto_400Regular,
   Roboto_700Bold,
+  useFonts,
 } from '@expo-google-fonts/roboto'
-
-import { BaiJamjuree_700Bold } from '@expo-google-fonts/bai-jamjuree'
-
-import { SettingsProvider } from '@/contexts/Settings'
-import Article from '@/app/article'
+import { Stack } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
+import { origins as gameOrigins } from '@/assets/json/game/origins.json'
 
 import { origins as techOrigins } from '@/assets/json/tech/origins.json'
-import { origins as gameOrigins } from '@/assets/json/game/origins.json'
+import { SettingsProvider } from '@/contexts/Settings'
 
 export default function Layout() {
   const { colorScheme, setColorScheme } = useColorScheme()

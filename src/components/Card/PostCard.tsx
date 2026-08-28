@@ -1,13 +1,11 @@
 import { Image, Pressable, PressableProps, Text, View } from 'react-native'
 
-import posts from '@/assets/json/posts.json'
-
 export type Item = {
-  user: String
-  avatar: String
-  image: String
-  likes?: Number
-  caption: String
+  user: string
+  avatar: string
+  image: string
+  likes?: number
+  caption: string
 }
 
 export type PostCardProps = PressableProps & {

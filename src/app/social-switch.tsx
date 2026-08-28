@@ -1,19 +1,17 @@
-import { ComponentProps, useState } from 'react'
-import { FlatList, Image, Pressable, Text, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { useRouter } from 'expo-router'
 import Icon from '@expo/vector-icons/Feather'
-
-import _posts from '@/assets/json/posts.json'
-import { HeroCard, NewsCard, PostCard, PlaylistItem } from '@/components/Card'
+import { ComponentProps, useState } from 'react'
+import { FlatList, Pressable, View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import colors from 'tailwindcss/colors'
+import _posts from '@/assets/json/posts.json'
+import { HeroCard, NewsCard, PlaylistItem, PostCard } from '@/components/Card'
 
 type Data = {
-  id: Number
-  title: String
-  slug: String
-  imageAltText: String
-  cover: String
+  id: number
+  title: string
+  slug: string
+  imageAltText: string
+  cover: string
 }
 const posts = { data: _posts.data as Data[] }
 
@@ -86,8 +84,6 @@ const renderCard = (item: Data, layout: LayoutType) => {
 
 export default function SocialSwitch() {
   const { bottom, top } = useSafeAreaInsets()
-
-  const router = useRouter()
 
   const [layout, setLayout] = useState<LayoutType>('news')
 

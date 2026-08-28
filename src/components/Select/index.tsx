@@ -1,8 +1,7 @@
-import React, { useCallback, useState } from 'react'
-import { Modal, View, Text, TouchableOpacity, ScrollView } from 'react-native'
-import { useRouter } from 'expo-router'
 import Icon from '@expo/vector-icons/Feather'
-import colors, { slate } from 'tailwindcss/colors'
+import { useCallback, useState } from 'react'
+import { Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { slate } from 'tailwindcss/colors'
 
 interface Option {
   label: string
@@ -20,7 +19,6 @@ export default function Select({
   options,
   handleOnChange,
 }: SelectProps) {
-  const router = useRouter()
   //const { colorScheme, toggleColorScheme } = useColorScheme()
 
   const [modalVisible, setModalVisible] = useState(false)

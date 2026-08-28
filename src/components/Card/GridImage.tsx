@@ -11,7 +11,7 @@ export const GRID_CONFIG = {
 }
 
 export type Item = {
-  image: String
+  image: string
 }
 
 export type GridImageProps = PressableProps & {

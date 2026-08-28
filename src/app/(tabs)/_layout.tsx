@@ -1,12 +1,10 @@
-import { View } from 'react-native'
-import { useColorScheme } from 'nativewind'
-import colors, { slate } from 'tailwindcss/colors'
-
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from '@expo/vector-icons/Feather'
-
-import ArticlesTech from './tech/articles/[origin]'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useColorScheme } from 'nativewind'
+import { View } from 'react-native'
+import colors, { slate } from 'tailwindcss/colors'
 import ArticlesGame from './game/articles/[origin]'
+import ArticlesTech from './tech/articles/[origin]'
 
 const Tab = createBottomTabNavigator()
 
