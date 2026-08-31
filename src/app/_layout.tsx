@@ -10,12 +10,15 @@ import {
   Roboto_700Bold,
   useFonts,
 } from '@expo-google-fonts/roboto'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { origins as gameOrigins } from '@/assets/json/game/origins.json'
 
 import { origins as techOrigins } from '@/assets/json/tech/origins.json'
 import { SettingsProvider } from '@/contexts/Settings'
+
+const queryClient = new QueryClient()
 
 export default function Layout() {
   const { colorScheme, setColorScheme } = useColorScheme()
@@ -47,25 +50,27 @@ export default function Layout() {
   }
 
   return (
-    <SettingsProvider
-      origin={techOrigins[0].title}
-      originGame={gameOrigins[0].title}
-    >
-      <View
-        style={{ flex: 1 }}
-        className="relative flex-1 bg-background dark:bg-background-dark"
+    <QueryClientProvider client={queryClient}>
+      <SettingsProvider
+        origin={techOrigins[0].title}
+        originGame={gameOrigins[0].title}
       >
-        <StatusBar
-          style={colorScheme === 'dark' ? 'light' : 'dark'}
-          translucent
-        />
+        <View
+          style={{ flex: 1 }}
+          className="relative flex-1 bg-background dark:bg-background-dark"
+        >
+          <StatusBar
+            style={colorScheme === 'dark' ? 'light' : 'dark'}
+            translucent
+          />
 
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="article" />
-          <Stack.Screen name="social-grid" />
-        </Stack>
-      </View>
-    </SettingsProvider>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="article" />
+            <Stack.Screen name="social-grid" />
+          </Stack>
+        </View>
+      </SettingsProvider>
+    </QueryClientProvider>
   )
 }

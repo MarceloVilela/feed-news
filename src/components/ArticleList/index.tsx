@@ -5,8 +5,8 @@ import { useRouter } from 'expo-router'
 import { useMemo } from 'react'
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 
-import { Content } from '@/app/(tabs)/tech/articles/[origin]'
 import { colors } from '@/styles/colors'
+import { Content } from '@/types/content'
 import { uniqueById } from '@/utils/uniqueById'
 import { GridImage, HeroCard, NewsCard, PlaylistItem, PostCard } from '../Card'
 
