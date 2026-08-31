@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "feed-news",
+    "name": "Feed News",
     "slug": "feed-news",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#0F172A"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false

@@ -17,21 +17,25 @@ import { origins as gameOrigins } from '@/assets/json/game/origins.json'
 
 import { origins as techOrigins } from '@/assets/json/tech/origins.json'
 import { SettingsProvider } from '@/contexts/Settings'
+import { getStoredColorScheme } from '@/lib/theme-storage'
 
 const queryClient = new QueryClient()
 
 export default function Layout() {
   const { colorScheme, setColorScheme } = useColorScheme()
 
-  // Dark é o tema padrão ao abrir o app — a ref garante que roda uma única vez
-  // mesmo que `setColorScheme` não seja uma referência estável entre renders
-  // (senão o efeito reforça 'dark' de novo a cada toggle, cancelando o Select).
+  // Dark é o tema padrão só na primeira abertura real (sem preferência salva) — a ref
+  // garante que roda uma única vez mesmo que `setColorScheme` não seja uma referência
+  // estável entre renders (senão o efeito reforça o tema de novo a cada toggle,
+  // cancelando o Select).
   const hasSetInitialTheme = useRef(false)
   useEffect(() => {
-    if (!hasSetInitialTheme.current) {
-      hasSetInitialTheme.current = true
-      setColorScheme('dark')
-    }
+    if (hasSetInitialTheme.current) return
+    hasSetInitialTheme.current = true
+
+    getStoredColorScheme().then((stored) => {
+      setColorScheme(stored ?? 'dark')
+    })
   }, [setColorScheme])
 
   const [hasLoadedFonts] = useFonts({

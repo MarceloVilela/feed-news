@@ -1,4 +1,5 @@
-import { Dimensions, Image, Pressable, PressableProps } from 'react-native'
+import { Dimensions, Pressable, PressableProps } from 'react-native'
+import { Image } from '@/components/Image'
 
 const NUM_COLUMNS = 3
 const GAP = 1

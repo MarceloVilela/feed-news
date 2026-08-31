@@ -1,4 +1,5 @@
-import { FlatList, View } from 'react-native'
+import { FlashList } from '@shopify/flash-list'
+import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import posts from '@/assets/json/posts.json'
@@ -12,7 +13,7 @@ export default function Social() {
       className="flex-1 bg-zinc-950"
       style={{ paddingBottom: bottom, paddingTop: top }}
     >
-      <FlatList
+      <FlashList
         data={posts.data}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (

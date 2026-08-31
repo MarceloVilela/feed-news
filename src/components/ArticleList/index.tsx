@@ -1,16 +1,10 @@
-import Icon from '@expo/vector-icons/Feather'
-import dayjs from 'dayjs'
-import ptBR from 'dayjs/locale/pt-br'
+import { FlashList } from '@shopify/flash-list'
 import { useRouter } from 'expo-router'
 import { useMemo } from 'react'
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 
-import { colors } from '@/styles/colors'
 import { Content } from '@/types/content'
 import { uniqueById } from '@/utils/uniqueById'
 import { GridImage, HeroCard, NewsCard, PlaylistItem, PostCard } from '../Card'
-
-dayjs.locale(ptBR)
 
 interface ArticleCardWithImageProps {
   articles: Content[]
@@ -100,51 +94,6 @@ const renderCard = ({ layout, item, onPress }: RenderCardProps) => {
           }}
         />
       )
-    default:
-      return (
-        <TouchableOpacity
-          className="mb-4"
-          accessibilityRole="button"
-          accessibilityLabel={item.title}
-          onPress={() => onPress(item.link)}
-        >
-          <View className="hidden flex-row items-center">
-            <View className="h-px w-5 bg-dot-muted" />
-            <Text className="font-body text-sm text-text-faint">
-              {dayjs(item.posted_at).format('D[ de ]MMMM[, ]YYYY')}
-            </Text>
-          </View>
-          <View className="space-y-4 px-0">
-            <Image
-              source={{ uri: item.thumb }}
-              className="aspect-video w-full rounded-lg"
-              accessible={false}
-              alt=""
-            />
-            <View className="px-2">
-              <Text className="font-body text-xl leading-relaxed text-text-primary dark:text-text-primary-dark">
-                {item.title}
-              </Text>
-
-              <TouchableOpacity
-                className="flex-row items-center gap-2"
-                accessibilityRole="button"
-                accessibilityLabel="Ler mais"
-                onPress={() => onPress(item.link)}
-              >
-                <Text className="font-body text-md text-link dark:text-link-dark">
-                  Ler mais
-                </Text>
-                <Icon
-                  name="arrow-right"
-                  size={16}
-                  color={colors['icon-link']}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </TouchableOpacity>
-      )
   }
 }
 
@@ -157,7 +106,7 @@ export default function ArticleList({ articles }: ArticleCardWithImageProps) {
     router.push(`/article?url=${encodeURIComponent(url)}`)
 
   return (
-    <FlatList
+    <FlashList
       data={_articles}
       keyExtractor={(item) => String(item.id)}
       renderItem={({ item }) =>

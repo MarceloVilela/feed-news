@@ -1,4 +1,5 @@
-import { Image, Pressable, PressableProps, Text, View } from 'react-native'
+import { Pressable, PressableProps, Text, View } from 'react-native'
+import { Image } from '@/components/Image'
 
 export type Item = {
   user: string
@@ -29,7 +30,7 @@ export default function PostCard({ item, ...rest }: PostCardProps) {
       <Image
         source={{ uri: `${item.image}` }}
         className="w-full h-[420px]"
-        resizeMode="cover"
+        contentFit="cover"
       />
 
       <View className="px-3 pt-3 hidden">

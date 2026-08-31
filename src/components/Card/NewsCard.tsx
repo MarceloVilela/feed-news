@@ -1,4 +1,5 @@
-import { Image, Pressable, PressableProps, Text, View } from 'react-native'
+import { Pressable, PressableProps, Text, View } from 'react-native'
+import { Image } from '@/components/Image'
 
 export type Item = {
   title: string
@@ -44,7 +45,7 @@ export default function NewsCard({ item, ...rest }: NewsCardProps) {
         source={{ uri: `${item.image}` }}
         accessible={false}
         className="w-24 h-24 rounded-xl"
-        resizeMode="cover"
+        contentFit="cover"
       />
     </Pressable>
   )

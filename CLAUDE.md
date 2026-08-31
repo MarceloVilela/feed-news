@@ -76,9 +76,13 @@ over `App.tsx`, `components/**`, and `src/**`. Global stylesheet is `global.css`
 Metro via `withNativeWind` in `metro.config.js`. Colors are centralized in
 `src/styles/colors.ts` (named tokens, e.g. `background`/`background-dark`), extended into
 `theme.colors` in `tailwind.config.js` (`darkMode: "class"`) instead of raw Tailwind palette
-classes (`slate-900`, `zinc-400`...) in JSX. Theme follows the OS color scheme via NativeWind's
-`useColorScheme()` — nothing forces a single scheme anymore; both light and dark are reachable
-at runtime.
+classes (`slate-900`, `zinc-400`...) in JSX. Theme preference is persisted via
+`@react-native-async-storage/async-storage` (`src/lib/theme-storage.ts`). On mount,
+`src/app/_layout.tsx` (`useEffect` + `useRef` guard, so it only runs once) reads the stored
+scheme and applies it; dark is only forced when nothing is stored yet (first real app open).
+`Select`'s footer toggle (`toggleColorScheme()` from NativeWind) persists the new choice on every
+switch, so closing and reopening the app keeps the last theme picked instead of always reverting
+to dark.
 
 **Path alias**: `@/*` → `src/*` (see `tsconfig.json`).
 

@@ -1,4 +1,5 @@
-import { Image, Pressable, PressableProps, Text, View } from 'react-native'
+import { Pressable, PressableProps, Text, View } from 'react-native'
+import { Image } from '@/components/Image'
 
 export type Item = {
   title: string
@@ -25,7 +26,7 @@ export default function HeroCard({ item, ...rest }: HeroCardProps) {
         source={{ uri: `${item.image}` }}
         accessible={false}
         className="w-full h-52"
-        resizeMode="cover"
+        contentFit="cover"
       />
       <View className="p-4">
         {item.category && (

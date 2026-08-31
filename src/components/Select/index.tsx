@@ -2,6 +2,7 @@ import Icon from '@expo/vector-icons/Feather'
 import { useColorScheme } from 'nativewind'
 import { useCallback, useState } from 'react'
 import { Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { setStoredColorScheme } from '@/lib/theme-storage'
 import { colors } from '@/styles/colors'
 
 interface Option {
@@ -29,6 +30,12 @@ export default function Select({
     handleOnChange(label)
     //toggleColorScheme();
   }, [])
+
+  const handleToggleTheme = useCallback(() => {
+    const nextScheme = colorScheme === 'dark' ? 'light' : 'dark'
+    toggleColorScheme()
+    setStoredColorScheme(nextScheme)
+  }, [colorScheme, toggleColorScheme])
 
   return (
     <View className="flex items-end border-white mx-6">
@@ -75,7 +82,7 @@ export default function Select({
             </ScrollView>
 
             <TouchableOpacity
-              onPress={toggleColorScheme}
+              onPress={handleToggleTheme}
               accessibilityRole="button"
               accessibilityLabel={
                 colorScheme === 'dark'

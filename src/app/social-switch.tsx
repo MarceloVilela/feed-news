@@ -1,6 +1,7 @@
 import Icon from '@expo/vector-icons/Feather'
+import { FlashList } from '@shopify/flash-list'
 import { ComponentProps, useState } from 'react'
-import { FlatList, Pressable, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import colors from 'tailwindcss/colors'
 import _posts from '@/assets/json/posts.json'
@@ -105,7 +106,7 @@ export default function SocialSwitch() {
         ))}
       </View>
 
-      <FlatList
+      <FlashList
         data={posts.data}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => renderCard(item, layout)}
