@@ -17,6 +17,8 @@ export default function PlaylistItem({ item, ...rest }: PlaylistItemProps) {
   return (
     <Pressable
       {...rest}
+      accessibilityRole="button"
+      accessibilityLabel={`${item.title} — ${item.artist}`}
       className="px-4 py-4 border-b border-zinc-900 bg-black"
     >
       <View className="flex-row">

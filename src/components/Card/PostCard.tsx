@@ -15,7 +15,12 @@ export type PostCardProps = PressableProps & {
 
 export default function PostCard({ item, ...rest }: PostCardProps) {
   return (
-    <Pressable {...rest} className="mb-8">
+    <Pressable
+      {...rest}
+      accessibilityRole="button"
+      accessibilityLabel={`Ver post de ${item.user}`}
+      className="mb-8"
+    >
       <View className="flex-row items-center justify-between px-3 py-2">
         <View className="flex-row items-center gap-3">
           <Image

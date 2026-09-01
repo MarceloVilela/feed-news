@@ -21,6 +21,7 @@ interface UseOriginFeedParams {
 interface UseOriginFeedResult {
   articles: Content[]
   loading: boolean
+  isFetching: boolean
   error: boolean
   retry: () => void
   lastGoodOrigin: string | null
@@ -39,18 +40,20 @@ export function useOriginFeed({
   const originCurrent = origins.find(({ title }) => title === origin)
   const url = originCurrent ? originCurrent.url : origins[0].url
 
-  const { data, isLoading, isError, isSuccess, refetch } = useQuery({
-    queryKey: ['originFeed', apiPath, origin],
-    queryFn: async () => {
-      if (env.placeholder) {
-        await delay(1000)
-        return placeholder
-      }
-      const response = await api.get<NewsResponse>(`${apiPath}?url=${url}`)
-      return response.data
+  const { data, isLoading, isFetching, isError, isSuccess, refetch } = useQuery(
+    {
+      queryKey: ['originFeed', apiPath, origin],
+      queryFn: async () => {
+        if (env.placeholder) {
+          await delay(1000)
+          return placeholder
+        }
+        const response = await api.get<NewsResponse>(`${apiPath}?url=${url}`)
+        return response.data
+      },
+      placeholderData: keepPreviousData,
     },
-    placeholderData: keepPreviousData,
-  })
+  )
 
   useEffect(() => {
     if (isSuccess) {
@@ -61,6 +64,7 @@ export function useOriginFeed({
   return {
     articles: data?.data ?? [],
     loading: isLoading,
+    isFetching,
     error: isError,
     retry: () => {
       refetch()

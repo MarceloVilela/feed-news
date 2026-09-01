@@ -46,4 +46,8 @@ export const colors = {
 
   // Tab bar ((tabs)/_layout.tsx)
   'tab-inactive': '#CBD5E1', // slate-300
+
+  // Skeleton (ArticleListSkeleton) e barra de refetch discreta do Select
+  skeleton: '#E2E8F0', // slate-200
+  'skeleton-dark': '#334155', // slate-700
 }

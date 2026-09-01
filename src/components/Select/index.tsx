@@ -1,7 +1,15 @@
 import Icon from '@expo/vector-icons/Feather'
 import { useColorScheme } from 'nativewind'
 import { useCallback, useState } from 'react'
-import { Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from 'react-native'
 import { setStoredColorScheme } from '@/lib/theme-storage'
 import { colors } from '@/styles/colors'
 
@@ -22,6 +30,7 @@ export default function Select({
   handleOnChange,
 }: SelectProps) {
   const { colorScheme, toggleColorScheme } = useColorScheme()
+  const { height: windowHeight } = useWindowDimensions()
 
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -51,12 +60,43 @@ export default function Select({
         <Icon name="arrow-down" size={16} color={colors.border} />
       </TouchableOpacity>
 
-      <Modal animationType="slide" transparent visible={modalVisible}>
-        <View className="flex flex-1 content-center px-4 pt-4 pb-8 mt-2 mb-8 border-2 bg-background dark:bg-background-dark">
-          <View className="flex flex-1 w-full p-2 pb-8 rounded-lg bg-surface-modal dark:bg-surface-modal-dark">
-            <Text className="text-xl font-light px-3 py-5 text-on-surface-modal dark:text-on-surface-modal-dark">
-              Mudar para feed
-            </Text>
+      <Modal
+        animationType="slide"
+        transparent
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <Pressable
+          accessibilityViewIsModal
+          className="flex-1 justify-end bg-black/50"
+          onPress={() => setModalVisible(false)}
+        >
+          <Pressable
+            onPress={(event) => event.stopPropagation()}
+            style={{ height: windowHeight * 0.6 }}
+            className="w-full p-2 pb-8 rounded-t-2xl bg-surface-modal dark:bg-surface-modal-dark"
+          >
+            <View className="flex-row items-center justify-between px-3 py-5">
+              <Text className="text-xl font-light text-on-surface-modal dark:text-on-surface-modal-dark">
+                Mudar para feed
+              </Text>
+              <TouchableOpacity
+                onPress={() => setModalVisible(false)}
+                accessibilityRole="button"
+                accessibilityLabel="Fechar"
+                hitSlop={8}
+              >
+                <Icon
+                  name="x"
+                  size={22}
+                  color={
+                    colorScheme === 'dark'
+                      ? colors['on-surface-modal-dark']
+                      : colors['on-surface-modal']
+                  }
+                />
+              </TouchableOpacity>
+            </View>
 
             <ScrollView className="flex-1">
               {/* flex-row flex-wrap */}
@@ -104,8 +144,8 @@ export default function Select({
                 {colorScheme === 'dark' ? 'Tema escuro' : 'Tema claro'}
               </Text>
             </TouchableOpacity>
-          </View>
-        </View>
+          </Pressable>
+        </Pressable>
       </Modal>
     </View>
   )

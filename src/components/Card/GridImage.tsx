@@ -13,6 +13,7 @@ export const GRID_CONFIG = {
 
 export type Item = {
   image: string
+  label?: string
 }
 
 export type GridImageProps = PressableProps & {
@@ -23,6 +24,8 @@ export default function GridImage({ item, ...rest }: GridImageProps) {
   return (
     <Pressable
       {...rest}
+      accessibilityRole="button"
+      accessibilityLabel={item.label ?? 'Ver imagem'}
       style={{ width: GRID_CONFIG.SIZE, margin: GRID_CONFIG.GAP }}
     >
       <Image

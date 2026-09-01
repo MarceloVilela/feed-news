@@ -1,10 +1,11 @@
 import { useContext } from 'react'
-import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { origins } from '@/assets/json/game/origins.json'
 import placeholder from '@/assets/json/game/placeholder.json'
 import ArticleList from '@/components/ArticleList'
 import Select from '@/components/Select'
+import { ArticleListSkeleton, RefetchIndicator } from '@/components/Skeleton'
 import { SettingsContext } from '@/contexts/Settings'
 import { useOriginFeed } from '@/hooks/useOriginFeed'
 
@@ -19,6 +20,7 @@ export default function GameArticles() {
   const {
     articles,
     loading,
+    isFetching,
     error,
     retry,
     lastGoodOrigin,
@@ -43,9 +45,7 @@ export default function GameArticles() {
       />
 
       {loading ? (
-        <View className="flex-1 justify-center">
-          <ActivityIndicator size="large" />
-        </View>
+        <ArticleListSkeleton />
       ) : error ? (
         <View className="flex-1 items-center justify-center gap-3 px-6">
           <Text className="text-center text-base text-text-primary dark:text-text-primary-dark">
@@ -75,7 +75,10 @@ export default function GameArticles() {
           )}
         </View>
       ) : (
-        <ArticleList articles={articles} />
+        <>
+          {isFetching && <RefetchIndicator />}
+          <ArticleList articles={articles} />
+        </>
       )}
     </View>
   )

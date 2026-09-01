@@ -1,10 +1,11 @@
 import { useContext } from 'react'
-import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { origins } from '@/assets/json/tech/origins.json'
 import placeholder from '@/assets/json/tech/placeholder.json'
 import ArticleList from '@/components/ArticleList'
 import Select from '@/components/Select'
+import { ArticleListSkeleton, RefetchIndicator } from '@/components/Skeleton'
 import { SettingsContext } from '@/contexts/Settings'
 import { useOriginFeed } from '@/hooks/useOriginFeed'
 
@@ -18,6 +19,7 @@ export default function TechArticles() {
   const {
     articles,
     loading,
+    isFetching,
     error,
     retry,
     lastGoodOrigin,
@@ -42,9 +44,7 @@ export default function TechArticles() {
       />
 
       {loading ? (
-        <View className="flex-1 justify-center">
-          <ActivityIndicator size="large" />
-        </View>
+        <ArticleListSkeleton />
       ) : error ? (
         <View className="flex-1 items-center justify-center gap-3 px-6">
           <Text className="text-center text-base text-text-primary dark:text-text-primary-dark">
@@ -74,7 +74,10 @@ export default function TechArticles() {
           )}
         </View>
       ) : (
-        <ArticleList articles={articles} />
+        <>
+          {isFetching && <RefetchIndicator />}
+          <ArticleList articles={articles} />
+        </>
       )}
     </View>
   )
