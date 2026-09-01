@@ -49,6 +49,7 @@ export default function Select({
   return (
     <View className="flex items-end border-white mx-6">
       <TouchableOpacity
+        testID="select-trigger"
         onPress={() => setModalVisible(!modalVisible)}
         accessibilityRole="button"
         accessibilityLabel={`Feed atual: ${selected}. Toque para trocar`}
@@ -67,6 +68,7 @@ export default function Select({
         onRequestClose={() => setModalVisible(false)}
       >
         <Pressable
+          testID="select-backdrop"
           accessibilityViewIsModal
           className="flex-1 justify-end bg-black/50"
           onPress={() => setModalVisible(false)}

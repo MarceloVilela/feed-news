@@ -12,7 +12,7 @@ const ENV = {
   prod: {
     apiUrl: prodUrl,
     placeholder: false,
-    debugRequests: true,
+    debugRequests: false,
   },
 }
 

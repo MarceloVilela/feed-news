@@ -1,0 +1,26 @@
+appId: host.exp.exponent
+---
+# Fluxo crítico: abrir app -> trocar origem no Select -> ver lista carregar -> tocar
+# num card -> abrir a WebView do artigo (M3, etapa 4). Roda contra o Expo Go, mesmo
+# fluxo de dev usado no projeto hoje (achado A1, build nativo/EAS real, segue adiado
+# — ver 4-plano-ci-testes.md); ${EXPO_DEV_URL} vem de `expo start --android` (ex.:
+# exp://192.168.x.x:PORT). Requer env.ts local com `placeholder: true` (dados
+# determinísticos, sem depender da API real).
+- openLink: ${EXPO_DEV_URL}
+
+- assertVisible: "Netflix coloca app de controle para games na loja do iPhone"
+- assertVisible: "OlharDigital"
+
+- tapOn:
+    id: "select-trigger"
+- assertVisible: "Mudar para feed"
+- tapOn: "GizModo"
+
+- assertVisible: "GizModo"
+- assertVisible: "Netflix coloca app de controle para games na loja do iPhone"
+
+- tapOn: "Netflix coloca app de controle para games na loja do iPhone"
+- assertVisible: "Ver mais artigos"
+
+- tapOn: "Ver mais artigos"
+- assertVisible: "GizModo"
