@@ -1,13 +1,10 @@
 # Feed News (mobile)
 
-Cliente **React Native (Expo Router)** do agregador de notícias de tecnologia e games
+Cliente **React Native**, agregador de notícias de tecnologia e games
 [Feed News](https://github.com/MarceloVilela/feednews-next) — dezenas de portais brasileiros
 reunidos em um feed único, agora também nativo (Android/iOS), consumindo a mesma API que já
 alimenta a versão web.
 
-> Projeto pessoal de portfólio: adaptar para React Native (Expo Router + NativeWind) a mesma
-> arquitetura de fontes plugáveis já validada no [`feednews-next`](https://github.com/MarceloVilela/feednews-next),
-> sucessor direto do meu primeiro projeto React Native, [`Tech-News`](https://github.com/MarceloVilela/Tech-News) (2022).
 
 <p align="center">
   <img src=".github/readme/tech-mobile-mockup.png" alt="Feed de tecnologia" width="240" />
@@ -16,14 +13,15 @@ alimenta a versão web.
 
 ## Sobre
 
-- **Cliente puro, sem scraping local**: todo o trabalho de raspar HTML dos sites de origem fica
-  no backend (`feednews-next`); este app só consome `GET /{tech,game}/source?url=<origem>` via
-  Axios e renderiza o feed.
+- **Agrega conteúdo real de dezenas de portais**: notícias de tecnologia e games de várias fontes
+  reunidas num feed único, atualizado pela mesma API que alimenta a versão web — este app consome
+  `GET /{tech,game}/source?url=<origem>` via Axios e renderiza o feed já agregado pelo backend
+  (`feednews-next`).
 - **Duas verticais, uma UI**: abas Tech e Game (`(tabs)` no Expo Router), cada uma com sua
   própria lista de origens (`src/assets/json/{tech,game}/origins.json`) e sua própria seleção de
   fonte ativa, guardada em `SettingsContext`.
-- **Troca de fonte via modal**: o componente `Select` lista as origens disponíveis (ex.: GizModo,
-  Tecnoblog, GameVicio, IGN Brasil) e troca o feed carregado sem sair da tela.
+- **Troca de fonte via modal**: o componente `Select` lista as origens disponíveis e troca o feed
+  carregado sem sair da tela.
 - **Leitor de artigo embutido**: ao tocar em uma notícia, o link abre dentro do próprio app em
   uma `WebView`, sem depender do navegador do sistema.
 - **Catálogo de cards reaproveitável**: `src/components/Card` tem múltiplos layouts de item de
@@ -47,7 +45,7 @@ alimenta a versão web.
 App (tabs: Tech | Game)
     │
     ▼
-SettingsContext ── origem selecionada (ex.: GizModo, GameVicio)
+SettingsContext ── origem selecionada
     │
     ▼
 GET {apiUrl}/{tech,game}/source?url=<origem>   (backend feednews-next)
