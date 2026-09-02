@@ -16,6 +16,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.marcelovilela.feednews",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#0F172A"
@@ -29,6 +30,13 @@
     "plugins": [
       "expo-font",
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "00ff7fa1-a40c-4a4f-844a-4fb5f049512a"
+      }
+    },
+    "owner": "marcelovilela"
   }
 }

@@ -1,0 +1,52 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+#
+# Cópia de .gitignore pro pacote do EAS Build, exceto env.ts — sem esse arquivo, o Metro
+# quebra no build remoto (src/lib/api.ts e src/hooks/useOriginFeed.ts importam `env` direto
+# de `../../env`, e o EAS usa .gitignore por padrão pra montar o pacote quando não existe
+# .easignore, então env.ts nunca chegava aos servidores do EAS).
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+**__.**
+
+# typescript
+*.tsbuildinfo
+
+# generated native folders
+/ios
+/android
+
+src-48
+
+# local, un-versioned Claude Code instructions
+CLAUDE.local.md

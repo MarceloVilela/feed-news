@@ -4,8 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-An Expo Router news-feed app (tech + game article feeds, plus a "social" post-card
-experiment) styled with NativeWind/Tailwind. It was recently upgraded from Expo 48 to
+An Expo Router news-feed app (tech + game article feeds) styled with NativeWind/Tailwind. It was
+recently upgraded from Expo 48 to
 Expo 54 (see "Legacy code" below). See `README.md` for the portfolio-facing overview
 (what it is, stack, screenshots, how to run) — this file covers implementation details
 for working in the code, not duplicated there.
@@ -39,9 +39,9 @@ use `npm install` (not a strict installer) when adding packages.
 ## Architecture
 
 **Routing**: `expo-router` with `src/app` as the routes root (see `main: "expo-router/entry"`
-in package.json). Top-level stack (`src/app/_layout.tsx`) has three screens: `(tabs)`, `article`,
-and `social-grid`. `article.tsx` is a full-screen `WebView` reader that opens external article
-URLs passed via the `url` query param.
+in package.json). Top-level stack (`src/app/_layout.tsx`) has two screens: `(tabs)` and `article`.
+`article.tsx` is a full-screen `WebView` reader that opens external article URLs passed via the
+`url` query param.
 
 **Tabs**: `src/app/(tabs)/_layout.tsx` does NOT use expo-router's file-based tab convention —
 it manually builds a `@react-navigation/bottom-tabs` navigator and imports the two tab screens

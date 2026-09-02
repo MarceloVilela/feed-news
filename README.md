@@ -13,10 +13,13 @@ alimenta a versão web.
 
 ## Sobre
 
-- **Agrega conteúdo real de dezenas de portais**: notícias de tecnologia e games de várias fontes
-  reunidas num feed único, atualizado pela mesma API que alimenta a versão web — este app consome
-  `GET /{tech,game}/source?url=<origem>` via Axios e renderiza o feed já agregado pelo backend
-  (`feednews-next`).
+Feed News reúne, num só app, notícias de tecnologia e games publicadas por dezenas de portais
+brasileiros — sem precisar abrir um site ou app diferente para cada fonte. É um agregador: o
+feed é montado pela mesma API que alimenta a versão web (`feednews-next`, via
+`GET /{tech,game}/source?url=<origem>`), mas cada notícia sempre linka de volta pro artigo
+original na fonte que publicou — o crédito e o conteúdo completo continuam sendo do site de
+origem.
+
 - **Duas verticais, uma UI**: abas Tech e Game (`(tabs)` no Expo Router), cada uma com sua
   própria lista de origens (`src/assets/json/{tech,game}/origins.json`) e sua própria seleção de
   fonte ativa, guardada em `SettingsContext`.
@@ -27,6 +30,8 @@ alimenta a versão web.
 - **Catálogo de cards reaproveitável**: `src/components/Card` tem múltiplos layouts de item de
   feed (notícia, hero, grid, post, playlist) prontos para reuso — hoje o feed usa o layout
   `news`, mas trocar de layout é só mudar um parâmetro em `ArticleList`.
+- **Sem login, sem rastreamento**: nenhuma conta de usuário, nenhum SDK de analytics ou
+  anúncios — a única informação salva localmente é a preferência de tema (claro/escuro).
 
 ## Stack
 
@@ -105,8 +110,6 @@ src/
 └── lib/api.ts                 # instância Axios
 ```
 
-## Status
+## Privacidade
 
-Projeto em evolução: migrado recentemente de Expo 48 para Expo 54 (New Architecture, Expo
-Router), ainda sem build publicado em loja — próximo passo do roteiro de portfólio é gerar um
-APK instalável via EAS Build e, em seguida, publicar na Play Store.
+[Política de Privacidade](https://claude.ai/code/artifact/5d2f8bd7-70fb-4c58-be69-0391d02bd79d)
