@@ -10,6 +10,7 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { setStoredColorScheme } from '@/lib/theme-storage'
 import { colors } from '@/styles/colors'
 
@@ -31,13 +32,13 @@ export default function Select({
 }: SelectProps) {
   const { colorScheme, toggleColorScheme } = useColorScheme()
   const { height: windowHeight } = useWindowDimensions()
+  const { bottom } = useSafeAreaInsets()
 
   const [modalVisible, setModalVisible] = useState(false)
 
   const handleSwitchToFeed = useCallback(({ label }: { label: string }) => {
     setModalVisible(false)
     handleOnChange(label)
-    //toggleColorScheme();
   }, [])
 
   const handleToggleTheme = useCallback(() => {
@@ -75,8 +76,8 @@ export default function Select({
         >
           <Pressable
             onPress={(event) => event.stopPropagation()}
-            style={{ height: windowHeight * 0.6 }}
-            className="w-full p-2 pb-8 rounded-t-2xl bg-surface-modal dark:bg-surface-modal-dark"
+            style={{ height: windowHeight * 0.6, paddingBottom: 32 + bottom }}
+            className="w-full px-2 pt-2 rounded-t-2xl bg-surface-modal dark:bg-surface-modal-dark"
           >
             <View className="flex-row items-center justify-between px-3 py-5">
               <Text className="text-xl font-light text-on-surface-modal dark:text-on-surface-modal-dark">
@@ -101,7 +102,6 @@ export default function Select({
             </View>
 
             <ScrollView className="flex-1">
-              {/* flex-row flex-wrap */}
               <View>
                 {options.map(({ label, value }) => (
                   <TouchableOpacity
@@ -109,13 +109,9 @@ export default function Select({
                     onPress={() => handleSwitchToFeed({ label })}
                     accessibilityRole="button"
                     accessibilityLabel={`Trocar feed para ${label}`}
-                    className="p-1 border-b-2 border-divider dark:border-divider-dark" //w-1/2
-                    //style={{ borderColor: theme.foreground600 }}
+                    className="p-1 border-b-2 border-divider dark:border-divider-dark"
                   >
-                    <Text
-                      className="text-lg font-light text-on-surface-modal dark:text-on-surface-modal-dark"
-                      //style={{ color: theme.foreground500 }}
-                    >
+                    <Text className="text-lg font-light text-on-surface-modal dark:text-on-surface-modal-dark">
                       {label}
                     </Text>
                   </TouchableOpacity>

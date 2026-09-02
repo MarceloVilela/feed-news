@@ -6,7 +6,6 @@ const GAP = 1
 const SIZE = Dimensions.get('window').width / NUM_COLUMNS - GAP * 2
 
 export const GRID_CONFIG = {
-  //NUM_COLUMNS,
   GAP,
   SIZE,
 }

@@ -47,7 +47,10 @@ export default function TechArticles() {
         <ArticleListSkeleton />
       ) : error ? (
         <View className="flex-1 items-center justify-center gap-3 px-6">
-          <Text className="text-center text-base text-text-primary dark:text-text-primary-dark">
+          <Text
+            accessibilityLiveRegion="polite"
+            className="text-center text-base text-text-primary dark:text-text-primary-dark"
+          >
             Não foi possível carregar essa fonte agora.
           </Text>
           <TouchableOpacity
